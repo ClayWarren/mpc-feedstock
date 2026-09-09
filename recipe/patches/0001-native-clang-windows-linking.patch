@@ -1,0 +1,36 @@
+Use Clang GNU-driver options with MSVC-style libtool on Windows ARM64.
+The generated configure and its macro sources are changed together.
+Forward each export option explicitly to LLD instead of treating -link
+as the Microsoft compiler driver does.
+
+--- a/configure
++++ b/configure
+@@ -11345,7 +11345,7 @@
+             cp "$export_symbols" "$output_objdir/$soname.def";
+             echo "$tool_output_objdir$soname.def" > "$output_objdir/$soname.exp";
+           else
+-            $SED -e '\''s/^/-link -EXPORT:/'\'' < $export_symbols > $output_objdir/$soname.exp;
++            $SED -e '\''s/^/-Xlinker -EXPORT:/'\'' < $export_symbols > $output_objdir/$soname.exp;
+           fi~
+           $CC -o $tool_output_objdir$soname $libobjs $compiler_flags $deplibs "@$tool_output_objdir$soname.exp" -Wl,-DLL,-IMPLIB:"$tool_output_objdir$libname.dll.lib"~
+           linknames='
+--- a/m4/libtool.m4
++++ b/m4/libtool.m4
+@@ -5597,7 +5597,7 @@
+             cp "$export_symbols" "$output_objdir/$soname.def";
+             echo "$tool_output_objdir$soname.def" > "$output_objdir/$soname.exp";
+           else
+-            $SED -e '\''s/^/-link -EXPORT:/'\'' < $export_symbols > $output_objdir/$soname.exp;
++            $SED -e '\''s/^/-Xlinker -EXPORT:/'\'' < $export_symbols > $output_objdir/$soname.exp;
+           fi~
+           $CC -o $tool_output_objdir$soname $libobjs $compiler_flags $deplibs "@$tool_output_objdir$soname.exp" -Wl,-DLL,-IMPLIB:"$tool_output_objdir$libname.dll.lib"~
+           linknames='
+@@ -6671,7 +6671,7 @@
+               cp "$export_symbols" "$output_objdir/$soname.def";
+               echo "$tool_output_objdir$soname.def" > "$output_objdir/$soname.exp";
+             else
+-              $SED -e '\''s/^/-link -EXPORT:/'\'' < $export_symbols > $output_objdir/$soname.exp;
++              $SED -e '\''s/^/-Xlinker -EXPORT:/'\'' < $export_symbols > $output_objdir/$soname.exp;
+             fi~
+             $CC -o $tool_output_objdir$soname $libobjs $compiler_flags $deplibs "@$tool_output_objdir$soname.exp" -Wl,-DLL,-IMPLIB:"$tool_output_objdir$libname.dll.lib"~
+             linknames='
