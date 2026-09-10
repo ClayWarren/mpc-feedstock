@@ -1,0 +1,15 @@
+Declare the Windows descriptor functions used by the stream-redirection test.
+The UCRT provides these declarations in io.h, rather than unistd.h.
+
+--- a/tests/tio_str.c
++++ b/tests/tio_str.c
+@@ -26,6 +26,9 @@
+ #endif
+ #include <unistd.h> /* for dup, dup2, STDIN_FILENO and STDOUT_FILENO */
+ #else
++#ifdef _WIN32
++#include <io.h> /* for dup, dup2 and close */
++#endif
+ #define STDIN_FILENO 0
+ #define STDOUT_FILENO 1
+ #endif

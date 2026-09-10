@@ -10,6 +10,7 @@ source:
   sha256: 3210b3a546b1cb00c296ca360891d7740ee6ff06deb02a27a35b20cd3c0bb1a5
   patches:
     - patches/0001-native-clang-windows-linking.patch  # [win and arm64]
+    - patches/0002-windows-test-io-header.patch  # [win and arm64]
 
 build:
   number: 2
