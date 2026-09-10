@@ -32,9 +32,11 @@ if [[ "$target_platform" == "win-64" ]]; then
 fi
 
 if [[ "$target_platform" == "win-arm64" ]]; then
-  # Native MSVC-style libtool installs its DLL beside the import library.
+  # Keep the DLL on PATH with either native libtool installation layout.
   mkdir -p "$PREFIX/bin"
-  mv "$PREFIX/lib/mpc-3.dll" "$PREFIX/bin/mpc-3.dll"
+  if [[ -f "$PREFIX/lib/mpc-3.dll" ]]; then
+    mv "$PREFIX/lib/mpc-3.dll" "$PREFIX/bin/mpc-3.dll"
+  fi
   mv "$PREFIX/lib/mpc.dll.lib" "$PREFIX/lib/mpc.lib"
   test -f "$PREFIX/bin/mpc-3.dll"
   test -f "$PREFIX/lib/mpc.lib"
