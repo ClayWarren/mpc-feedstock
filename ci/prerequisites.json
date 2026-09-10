@@ -1,0 +1,14 @@
+[
+  {
+    "repository": "mpfr",
+    "artifact": 10134470040,
+    "file": "gmp-6.3.0-h2fa7ca5_3.conda",
+    "sha256": "df6a25e19c496bf571e6fe34abcb147591fa8b92a10921e889af402d2cb3f7b6"
+  },
+  {
+    "repository": "mpfr",
+    "artifact": 10134470040,
+    "file": "mpfr-4.2.2-h52c769d_2.conda",
+    "sha256": "682037858929fe458e53f988f4aa9b7fe7ad90adde623db466f4cdbbd2ac3abf"
+  }
+]
